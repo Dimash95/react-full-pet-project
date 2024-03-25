@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getDetailProduct } from "../../api/get-detail-product";
 import styles from "./detail.module.css";
@@ -15,15 +15,15 @@ export const Detail = () => {
   const { cardId = "" } = useParams<{ cardId?: string }>();
   const [detailProduct, setDetailProduct] = useState<DetailProductType>({});
 
-  const displayDetailProduct = async (cardId: string) => {
-    if (cardId) {
-      const fetchedDetailProduct = await getDetailProduct(cardId);
-      if (fetchedDetailProduct) setDetailProduct(fetchedDetailProduct.data);
-    }
-  };
+  useEffect(() => {
+    const displayDetailProduct = async () => {
+      if (cardId) {
+        const fetchedDetailProduct = await getDetailProduct(cardId);
+        if (fetchedDetailProduct) setDetailProduct(fetchedDetailProduct.data);
+      }
+    };
 
-  useState(() => {
-    displayDetailProduct(cardId);
+    displayDetailProduct();
   }, [cardId]);
 
   return (

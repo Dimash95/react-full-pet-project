@@ -6,11 +6,20 @@ import { FaAngleRight } from "react-icons/fa6";
 import styles from "./home-card.module.css";
 import { Link } from "react-router-dom";
 
+type DetailProductType = {
+  id?: number;
+  images?: string[];
+  title?: string;
+  description?: string;
+  category?: { id?: number };
+  price?: number;
+};
+
 const Card = () => {
-  const [topProducts, setTopProducts] = useState([]);
+  const [topProducts, setTopProducts] = useState<DetailProductType[]>([]);
   const [offset, setOffset] = useState(0);
 
-  const displayTopProducts = async (offset) => {
+  const displayTopProducts = async (offset: number) => {
     const fetchedItems = await getTopProducts(offset);
     if (fetchedItems) {
       setTopProducts(fetchedItems.data);
@@ -21,7 +30,7 @@ const Card = () => {
     displayTopProducts(offset);
   }, [offset]);
 
-  function onHandleOffset(number) {
+  function onHandleOffset(number: number) {
     if (offset === 0 && number === -1) {
       return;
     }
@@ -34,24 +43,14 @@ const Card = () => {
     <>
       <h2 className={styles.title}>Top products</h2>
       <div className={styles.pagination}>
-        <button
-          className={styles.button}
-          disabled={offset === 0 ? true : false}
-        >
-          <FaChevronLeft
-            className={styles.arrow}
-            onClick={() => onHandleOffset(-1)}
-          />
+        <button className={styles.button} disabled={offset === 0 ? true : false}>
+          <FaChevronLeft className={styles.arrow} onClick={() => onHandleOffset(-1)} />
         </button>
         <div className={styles.cards}>
           {topProducts.map((product) => (
             <div className={styles.card} key={product.id}>
-              <Link to={`/catalog/${product.category.id}/detail/${product.id}`}>
-                <img
-                  src={product.images[0]}
-                  alt={product.title}
-                  className={styles.cardImage}
-                />
+              <Link to={`/catalog/${product.category?.id}/detail/${product.id}`}>
+                <img src={product.images?.[0]} alt={product.title} className={styles.cardImage} />
               </Link>
               <p className={styles.name}>{product.title}</p>
               <div className={styles.priceCartWrapper}>
@@ -61,14 +60,8 @@ const Card = () => {
             </div>
           ))}
         </div>
-        <button
-          className={styles.button}
-          disabled={offset === topProducts.length ? true : false}
-        >
-          <FaAngleRight
-            className={styles.arrow}
-            onClick={() => onHandleOffset(1)}
-          />
+        <button className={styles.button} disabled={offset === topProducts.length ? true : false}>
+          <FaAngleRight className={styles.arrow} onClick={() => onHandleOffset(1)} />
         </button>
       </div>
     </>
