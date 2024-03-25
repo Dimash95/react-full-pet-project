@@ -4,8 +4,14 @@ import styles from "./home-categories.module.css";
 import { useEffect, useState } from "react";
 import { getCategories } from "../../../api/get-categories";
 
+type CategoryType = {
+  id: number;
+  name: string;
+  image: string;
+};
+
 const HomeCategories = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
 
   const displayCategories = async () => {
     const fetchedItems = await getCategories();
