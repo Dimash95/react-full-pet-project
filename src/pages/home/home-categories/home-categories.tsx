@@ -1,14 +1,8 @@
-import { Link } from "react-router-dom";
-
-import styles from "./home-categories.module.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getCategories } from "../../../api/get-categories";
-
-type CategoryType = {
-  id: number;
-  name: string;
-  image: string;
-};
+import { CategoryType } from "../../../types/category";
+import styles from "./home-categories.module.css";
 
 const HomeCategories = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);

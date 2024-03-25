@@ -10,28 +10,28 @@ const Header = () => {
 
       <ul>
         <li>
-          <Link to="/" className={styles.link}>
+          <Link to="/react-full-pet-project" className={styles.link}>
             Home
           </Link>
         </li>
         <li>
-          <Link to="/catalog/1" className={styles.link}>
+          <Link to="/react-full-pet-project/catalog/1" className={styles.link}>
             Catalog
           </Link>
         </li>
         <li>
-          <Link to="/about" className={styles.link}>
+          <Link to="/react-full-pet-project/about" className={styles.link}>
             About
           </Link>
         </li>
         <li>
-          <Link to="/contacts" className={styles.link}>
+          <Link to="/react-full-pet-project/contacts" className={styles.link}>
             Contacts
           </Link>
         </li>
       </ul>
       <div>
-        <Link to="/cart" className={styles.link}>
+        <Link to="/react-full-pet-project/cart" className={styles.link}>
           <TiShoppingCart className={styles.cart} />
         </Link>
       </div>

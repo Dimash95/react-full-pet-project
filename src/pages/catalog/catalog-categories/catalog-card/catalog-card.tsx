@@ -3,33 +3,35 @@ import styles from "./catalog-card.module.css";
 import { useEffect, useState } from "react";
 import { getProductsByCategory } from "../../../../api/get-products-by-category";
 import { Link } from "react-router-dom";
+import { ProductType } from "../../../../types/product";
 
 type CatalogCardProps = {
   categoryId: string;
   searchedValue: string;
 };
 
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  images: string[];
-};
-
 const CatalogCard = ({ categoryId, searchedValue }: CatalogCardProps) => {
-  const [productsByCategory, setProductsByCategory] = useState<Product[]>([]);
+  const [productsByCategory, setProductsByCategory] = useState<ProductType[]>([]);
 
-  const displayProducts = async (categoryId: string, searchedValue: string) => {
-    const fetchedProducts = await getProductsByCategory(categoryId, searchedValue);
-    if (fetchedProducts) setProductsByCategory(fetchedProducts.data);
-  };
+  const [cartItemsIds, setCartItemsIds] = useState<Set<number>>(() => {
+    const savedCart = localStorage.getItem("cart");
+    return new Set(savedCart ? (JSON.parse(savedCart) as number[]) : []);
+  });
 
   useEffect(() => {
+    const displayProducts = async (categoryId: string, searchedValue: string) => {
+      const fetchedProducts = await getProductsByCategory(categoryId, searchedValue);
+      if (fetchedProducts) setProductsByCategory(fetchedProducts.data);
+    };
     displayProducts(categoryId, searchedValue);
   }, [categoryId, searchedValue]);
 
   const addToCart = (id: number) => {
-    console.log("Add to cart", id);
+    if (!cartItemsIds.has(id)) {
+      const newCartItemIds = new Set(cartItemsIds).add(id);
+      setCartItemsIds(newCartItemIds);
+      localStorage.setItem("cart", JSON.stringify([...newCartItemIds]));
+    }
   };
 
   return (
@@ -37,13 +39,17 @@ const CatalogCard = ({ categoryId, searchedValue }: CatalogCardProps) => {
       <div className={styles.cards}>
         {productsByCategory.map((product) => (
           <div className={styles.card} key={product.id}>
-            <Link to={`/catalog/${categoryId}/detail/${product.id}`}>
+            <Link to={`/react-full-pet-project/catalog/${categoryId}/detail/${product.id}`}>
               <img src={product.images[0]} alt={product.title} className={styles.cardImage} />
             </Link>
             <p className={styles.name}>{product.title}</p>
             <div className={styles.priceCartWrapper}>
               <p>{product.price} $</p>
-              <TiShoppingCart className={styles.cart} onClick={() => addToCart(product.id)} />
+              {cartItemsIds.has(product.id) ? (
+                <p className={styles.addedToCart}>Go to Cart</p>
+              ) : (
+                <TiShoppingCart className={styles.cart} onClick={() => addToCart(product.id)} />
+              )}
             </div>
           </div>
         ))}

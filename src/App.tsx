@@ -10,13 +10,13 @@ import { Detail } from "./pages/detail/detail";
 const App = () => (
   <Layout>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/catalog" element={<Catalog />} />
-      <Route path="/catalog/:categoryId" element={<Catalog />} />
-      <Route path="/catalog/:categoryId/detail/:cardId" element={<Detail />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contacts" element={<Contacts />} />
-      <Route path="/cart" element={<Cart />} />
+      <Route path="/react-full-pet-project" element={<Home />} />
+      <Route path="/react-full-pet-project/catalog" element={<Catalog />} />
+      <Route path="/react-full-pet-project/catalog/:categoryId" element={<Catalog />} />
+      <Route path="/react-full-pet-project/catalog/:categoryId/detail/:cardId" element={<Detail />} />
+      <Route path="/react-full-pet-project/about" element={<About />} />
+      <Route path="/react-full-pet-project/contacts" element={<Contacts />} />
+      <Route path="/react-full-pet-project/cart" element={<Cart />} />
     </Routes>
   </Layout>
 );

@@ -50,3 +50,10 @@
 .cart {
   font-size: 2em;
 }
+
+.addedToCart {
+  color: #d05c81;
+  border: 1px solid #d05c81;
+  padding: 5px 10px;
+  border-radius: 5px;
+}

@@ -5,15 +5,7 @@ import { FaChevronLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
 import styles from "./home-card.module.css";
 import { Link } from "react-router-dom";
-
-type DetailProductType = {
-  id?: number;
-  images?: string[];
-  title?: string;
-  description?: string;
-  category?: { id?: number };
-  price?: number;
-};
+import { DetailProductType } from "../../../types/detail-product";
 
 const Card = () => {
   const [topProducts, setTopProducts] = useState<DetailProductType[]>([]);
