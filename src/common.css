@@ -1,0 +1,10 @@
+@import url("./assets/styles/reset.css");
+
+body {
+  background-color: black;
+}
+
+.wrapper {
+  padding: 10px 10px;
+  background-image: url("./assets/img/back.jpg");
+}

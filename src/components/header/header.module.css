@@ -1,0 +1,59 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1220px;
+  width: 100%;
+  height: 70px;
+  margin: 0 auto;
+  padding: 0px 30px;
+  background-color: #d05c81;
+  border-radius: 20px;
+}
+
+.logo {
+  font-size: 2.5em;
+  animation: spin 5s linear 0s infinite;
+  color: yellow;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.wrapper ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.link {
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  transition: 0.4s;
+}
+
+.link:hover {
+  color: yellow;
+}
+
+.cart {
+  font-size: 2em;
+  transition: 0.4s;
+}
+
+.cart:hover {
+  color: yellow;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    display: none;
+  }
+}

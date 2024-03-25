@@ -1,0 +1,52 @@
+.content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: calc(100vh - 240px);
+  color: white;
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.image {
+  width: 400px;
+  height: 400px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 400px;
+}
+
+.title {
+  font-size: 2.5em;
+  font-weight: 600;
+}
+
+.price {
+  font-size: large;
+  font-weight: 600;
+}
+
+.span {
+  font-weight: 600;
+  color: #d05c81;
+}
+
+.checkout {
+  width: 200px;
+  padding: 10px;
+  color: white;
+  background-color: #d05c81;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.checkout:active {
+  transform: scale(0.9);
+}
