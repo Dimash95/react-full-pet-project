@@ -1,7 +1,6 @@
 .cards {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 20px;
   max-width: 1100px;
   width: 100%;
@@ -29,11 +28,11 @@
 }
 
 .button:disabled .arrow {
-  color: gray;
+  visibility: hidden;
 }
 
 .arrow {
-  color: white;
+  color: gray;
   font-size: 5em;
   cursor: pointer;
 }
@@ -64,7 +63,6 @@
   margin-top: 60px;
   text-align: center;
   font-size: 40px;
-  color: white;
 }
 
 .priceCartWrapper {

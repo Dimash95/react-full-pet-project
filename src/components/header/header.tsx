@@ -1,14 +1,30 @@
 import { Link } from "react-router-dom";
 import { FaReact } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
+import { Switch } from "antd";
 import styles from "./header.module.css";
+import { ThemeContext } from "../../context";
+import { useContext } from "react";
+import classNames from "classnames";
 
 const Header = () => {
-  return (
-    <div className={styles.wrapper}>
-      <FaReact className={styles.logo} />
+  const { theme, setTheme } = useContext(ThemeContext);
 
-      <ul>
+  const onChange = (checked: boolean) => {
+    console.log(`switch to ${checked}`);
+    setTheme(checked ? "dark" : "light");
+    console.log(theme);
+  };
+
+  return (
+    <div
+      className={classNames(
+        theme === "dark" ? styles.wrapperDark : styles.wrapperLight,
+        styles.wrapper
+      )}
+    >
+      <FaReact className={styles.logo} />
+      <ul className={styles.list}>
         <li>
           <Link to="/react-full-pet-project" className={styles.link}>
             Home
@@ -30,10 +46,12 @@ const Header = () => {
           </Link>
         </li>
       </ul>
-      <div>
+      <div className={styles.icons}>
         <Link to="/react-full-pet-project/cart" className={styles.link}>
           <TiShoppingCart className={styles.cart} />
         </Link>
+
+        <Switch defaultChecked onChange={onChange} />
       </div>
     </div>
   );

@@ -8,6 +8,15 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: url("./assets/img/back.jpg");
   min-height: 100vh;
+}
+
+.wrapperDark {
+  background-image: url("./assets/img/dark-back.jpg");
+  color: white;
+}
+
+.wrapperLight {
+  background-image: url("./assets/img/light-back.jpg");
+  color: black;
 }
