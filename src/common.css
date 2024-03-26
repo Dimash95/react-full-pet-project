@@ -5,6 +5,9 @@ body {
 }
 
 .wrapper {
-  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-image: url("./assets/img/back.jpg");
+  min-height: 100vh;
 }

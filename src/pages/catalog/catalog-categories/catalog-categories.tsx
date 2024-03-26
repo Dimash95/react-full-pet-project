@@ -27,7 +27,7 @@ const Category = ({ categories }: CategoryProps) => {
           {categories.map((category) => (
             <Link
               className={styles.name}
-              to={`/catalog/${category.id}`}
+              to={`/react-full-pet-project/catalog/${category.id}`}
               key={category.id}
               onClick={() => setSearchedValue("")}
             >

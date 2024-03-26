@@ -29,7 +29,7 @@ const HomeCategories = () => {
       <div className={styles.categories}>
         {categories.map((category) => (
           <Link
-            to={`/catalog/${category.id}`}
+            to={`/react-full-pet-project/catalog/${category.id}`}
             key={category.id}
             className={styles.link}
             // onClick={() => displayNavigation(category.name)}

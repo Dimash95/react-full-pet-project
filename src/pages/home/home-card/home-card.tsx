@@ -18,6 +18,19 @@ const Card = () => {
     }
   };
 
+  const [cartItemsIds, setCartItemsIds] = useState<Set<number>>(() => {
+    const savedCart = localStorage.getItem("cart");
+    return new Set(savedCart ? (JSON.parse(savedCart) as number[]) : []);
+  });
+
+  const addToCart = (id: number) => {
+    if (!cartItemsIds.has(id)) {
+      const newCartItemIds = new Set(cartItemsIds).add(id);
+      setCartItemsIds(newCartItemIds);
+      localStorage.setItem("cart", JSON.stringify([...newCartItemIds]));
+    }
+  };
+
   useEffect(() => {
     displayTopProducts(offset);
   }, [offset]);
@@ -41,13 +54,21 @@ const Card = () => {
         <div className={styles.cards}>
           {topProducts.map((product) => (
             <div className={styles.card} key={product.id}>
-              <Link to={`/catalog/${product.category?.id}/detail/${product.id}`}>
+              <Link
+                to={`/react-full-pet-project/catalog/${product.category?.id}/detail/${product.id}`}
+              >
                 <img src={product.images?.[0]} alt={product.title} className={styles.cardImage} />
               </Link>
               <p className={styles.name}>{product.title}</p>
               <div className={styles.priceCartWrapper}>
                 <p>{product.price} $</p>
-                <TiShoppingCart className={styles.cart} />
+                {cartItemsIds.has(product.id) ? (
+                  <Link to="/react-full-pet-project/cart" className={styles.addedToCart}>
+                    Go to cart
+                  </Link>
+                ) : (
+                  <TiShoppingCart className={styles.cart} onClick={() => addToCart(product.id)} />
+                )}
               </div>
             </div>
           ))}

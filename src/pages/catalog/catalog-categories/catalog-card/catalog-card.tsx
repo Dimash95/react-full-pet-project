@@ -46,7 +46,9 @@ const CatalogCard = ({ categoryId, searchedValue }: CatalogCardProps) => {
             <div className={styles.priceCartWrapper}>
               <p>{product.price} $</p>
               {cartItemsIds.has(product.id) ? (
-                <p className={styles.addedToCart}>Go to Cart</p>
+                <Link to="/react-full-pet-project/cart" className={styles.addedToCart}>
+                  Go to cart
+                </Link>
               ) : (
                 <TiShoppingCart className={styles.cart} onClick={() => addToCart(product.id)} />
               )}
