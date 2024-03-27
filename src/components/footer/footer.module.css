@@ -8,8 +8,15 @@
   margin: 0 auto;
   margin-top: 40px;
   padding: 0px 30px;
-  background-color: #d05c81;
   border-radius: 20px;
+}
+
+.wrapperDark {
+  background-color: #d05c81;
+}
+
+.wrapperLight {
+  background-color: #333;
 }
 
 .logo {
