@@ -11,9 +11,7 @@ const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const onChange = (checked: boolean) => {
-    console.log(`switch to ${checked}`);
     setTheme(checked ? "dark" : "light");
-    console.log(theme);
   };
 
   return (
@@ -26,7 +24,7 @@ const Header = () => {
       <FaReact className={styles.logo} />
       <ul className={styles.list}>
         <li>
-          <Link to="/react-full-pet-project" className={styles.link}>
+          <Link to="/react-full-pet-project/" className={styles.link}>
             Home
           </Link>
         </li>

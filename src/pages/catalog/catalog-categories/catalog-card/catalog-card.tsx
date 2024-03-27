@@ -1,9 +1,15 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import { getProductsByCategory } from "../../../../api/get-products-by-category";
+import { ProductType } from "../../../../types/product";
+
+import type { RootState } from "../../../../store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCartItemSlice } from "../../../../store/slices/cart-items-ids-slice";
+
 import { TiShoppingCart } from "react-icons/ti";
 import styles from "./catalog-card.module.css";
-import { useEffect, useState } from "react";
-import { getProductsByCategory } from "../../../../api/get-products-by-category";
-import { Link } from "react-router-dom";
-import { ProductType } from "../../../../types/product";
 
 type CatalogCardProps = {
   categoryId: string;
@@ -11,18 +17,14 @@ type CatalogCardProps = {
 };
 
 const CatalogCard = ({ categoryId, searchedValue }: CatalogCardProps) => {
+  const cartItemsIds = useSelector((state: RootState) => state.cartItemsIds.cartItemsIds);
+  const dispatch = useDispatch();
+
   const [productsByCategory, setProductsByCategory] = useState<ProductType[]>([]);
 
-  const [cartItemsIds, setCartItemsIds] = useState<Set<number>>(() => {
-    const savedCart = localStorage.getItem("cart");
-    return new Set(savedCart ? (JSON.parse(savedCart) as number[]) : []);
-  });
-
   const addToCart = (id: number) => {
-    if (!cartItemsIds.has(id)) {
-      const newCartItemIds = new Set(cartItemsIds).add(id);
-      setCartItemsIds(newCartItemIds);
-      localStorage.setItem("cart", JSON.stringify([...newCartItemIds]));
+    if (!cartItemsIds.includes(id)) {
+      dispatch(addToCartItemSlice(id));
     }
   };
 
@@ -45,7 +47,7 @@ const CatalogCard = ({ categoryId, searchedValue }: CatalogCardProps) => {
             <p className={styles.name}>{product.title}</p>
             <div className={styles.priceCartWrapper}>
               <p>{product.price} $</p>
-              {cartItemsIds.has(product.id) ? (
+              {cartItemsIds.includes(product.id) ? (
                 <Link to="/react-full-pet-project/cart" className={styles.addedToCart}>
                   Go to cart
                 </Link>

@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import { getTopProducts } from "../../../api/get-top-products";
+import { DetailProductType } from "../../../types/detail-product";
+
+import type { RootState } from "../../../store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCartItemSlice } from "../../../store/slices/cart-items-ids-slice";
+
 import { TiShoppingCart } from "react-icons/ti";
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
 import styles from "./home-card.module.css";
-import { Link } from "react-router-dom";
-import { DetailProductType } from "../../../types/detail-product";
 
 const Card = () => {
+  const cartItemsIds = useSelector((state: RootState) => state.cartItemsIds.cartItemsIds);
+  const dispatch = useDispatch();
+
   const [topProducts, setTopProducts] = useState<DetailProductType[]>([]);
   const [offset, setOffset] = useState(0);
 
@@ -18,22 +27,17 @@ const Card = () => {
     }
   };
 
-  const [cartItemsIds, setCartItemsIds] = useState<Set<number>>(() => {
-    const savedCart = localStorage.getItem("cart");
-    return new Set(savedCart ? (JSON.parse(savedCart) as number[]) : []);
-  });
-
   const addToCart = (id: number) => {
-    if (!cartItemsIds.has(id)) {
-      const newCartItemIds = new Set(cartItemsIds).add(id);
-      setCartItemsIds(newCartItemIds);
-      localStorage.setItem("cart", JSON.stringify([...newCartItemIds]));
+    if (!cartItemsIds.includes(id)) {
+      dispatch(addToCartItemSlice(id));
     }
   };
 
+  const cartItemsIdsString = cartItemsIds.join(",");
+
   useEffect(() => {
     displayTopProducts(offset);
-  }, [offset]);
+  }, [offset, cartItemsIdsString]);
 
   function onHandleOffset(number: number) {
     if (offset === 0 && number === -1) {
@@ -62,7 +66,7 @@ const Card = () => {
               <p className={styles.name}>{product.title}</p>
               <div className={styles.priceCartWrapper}>
                 <p>{product.price} $</p>
-                {cartItemsIds.has(product.id) ? (
+                {cartItemsIds.includes(product.id) ? (
                   <Link to="/react-full-pet-project/cart" className={styles.addedToCart}>
                     Go to cart
                   </Link>

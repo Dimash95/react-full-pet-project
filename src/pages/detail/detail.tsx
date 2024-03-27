@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+
 import { getDetailProduct } from "../../api/get-detail-product";
 import { DetailProductType } from "../../types/detail-product";
+
+import type { RootState } from "../../store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCartItemSlice } from "../../store/slices/cart-items-ids-slice";
+
 import styles from "./detail.module.css";
 
 export const Detail = () => {
+  const cartItemsIds = useSelector((state: RootState) => state.cartItemsIds.cartItemsIds);
+  const dispatch = useDispatch();
+
   const { cardId = "" } = useParams<{ cardId?: string }>();
   const [detailProduct, setDetailProduct] = useState<DetailProductType>({});
 
-  const [cartItemsIds, setCartItemsIds] = useState<Set<number>>(() => {
-    const savedCart = localStorage.getItem("cart");
-    return new Set(savedCart ? (JSON.parse(savedCart) as number[]) : []);
-  });
-
   const addToCart = (id: number) => {
-    if (!cartItemsIds.has(id)) {
-      const newCartItemIds = new Set(cartItemsIds).add(id);
-      setCartItemsIds(newCartItemIds);
-      localStorage.setItem("cart", JSON.stringify([...newCartItemIds]));
+    if (!cartItemsIds.includes(id)) {
+      dispatch(addToCartItemSlice(id));
     }
   };
 
@@ -44,7 +46,7 @@ export const Detail = () => {
         <p className={styles.price}>
           <span className={styles.span}>Price:</span> {detailProduct.price} $
         </p>
-        {cartItemsIds.has(detailProduct.id) ? (
+        {cartItemsIds.includes(detailProduct.id) ? (
           <Link to="/react-full-pet-project/cart" className={styles.checkout}>
             Go to cart
           </Link>
