@@ -15,7 +15,14 @@ export const Detail = () => {
   const dispatch = useDispatch();
 
   const { cardId = "" } = useParams<{ cardId?: string }>();
-  const [detailProduct, setDetailProduct] = useState<DetailProductType>({});
+  const [detailProduct, setDetailProduct] = useState<DetailProductType>({
+    id: 0,
+    images: [],
+    title: "",
+    description: "",
+    category: { id: 0, name: "" },
+    price: 0,
+  });
 
   const addToCart = (id: number) => {
     if (!cartItemsIds.includes(id)) {
