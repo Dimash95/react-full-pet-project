@@ -34,22 +34,32 @@ const Cart = () => {
 
   return (
     <div className={styles.content}>
-      <div className={styles.cards}>
-        {cartProducts.map((product) => (
-          <div className={styles.card} key={product.id}>
-            <div className={styles.remove} onClick={() => removeFromCart(product.id)}>
-              <IoCloseSharp />
-            </div>
-            <Link to={`/react-full-pet-project/catalog/${product.id}/detail/${product.id}`}>
-              <img src={product.images[0]} alt={product.title} className={styles.cardImage} />
-            </Link>
-            <p className={styles.name}>{product.title}</p>
-            <div className={styles.priceCartWrapper}>
-              <p>{product.price} $</p>
-            </div>
+      {cartItemsIds.length === 0 ? (
+        <div>
+          <h1 className={styles.emptyCart}>Your cart is empty</h1>
+          <div className={styles.addSome}>
+            <p>Add some products</p>
+            <Link to={`/react-full-pet-project/catalog/1`}>Catalog</Link>
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div className={styles.cards}>
+          {cartProducts.map((product) => (
+            <div className={styles.card} key={product.id}>
+              <div className={styles.remove} onClick={() => removeFromCart(product.id)}>
+                <IoCloseSharp />
+              </div>
+              <Link to={`/react-full-pet-project/catalog/${product.id}/detail/${product.id}`}>
+                <img src={product.images[0]} alt={product.title} className={styles.cardImage} />
+              </Link>
+              <p className={styles.name}>{product.title}</p>
+              <div className={styles.priceCartWrapper}>
+                <p>{product.price} $</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
