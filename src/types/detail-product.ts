@@ -3,6 +3,6 @@ export type DetailProductType = {
   images: string[];
   title: string;
   description: string;
-  category: { id: number };
+  category: { id: number; name: string };
   price: number;
 };

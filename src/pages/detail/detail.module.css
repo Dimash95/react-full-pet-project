@@ -39,6 +39,8 @@
 .checkout {
   width: 200px;
   padding: 10px;
+  text-align: center;
+  text-decoration: none;
   color: white;
   background-color: #d05c81;
   border: none;

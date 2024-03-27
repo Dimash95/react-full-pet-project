@@ -18,14 +18,6 @@ const CatalogCard = ({ categoryId, searchedValue }: CatalogCardProps) => {
     return new Set(savedCart ? (JSON.parse(savedCart) as number[]) : []);
   });
 
-  useEffect(() => {
-    const displayProducts = async (categoryId: string, searchedValue: string) => {
-      const fetchedProducts = await getProductsByCategory(categoryId, searchedValue);
-      if (fetchedProducts) setProductsByCategory(fetchedProducts.data);
-    };
-    displayProducts(categoryId, searchedValue);
-  }, [categoryId, searchedValue]);
-
   const addToCart = (id: number) => {
     if (!cartItemsIds.has(id)) {
       const newCartItemIds = new Set(cartItemsIds).add(id);
@@ -33,6 +25,14 @@ const CatalogCard = ({ categoryId, searchedValue }: CatalogCardProps) => {
       localStorage.setItem("cart", JSON.stringify([...newCartItemIds]));
     }
   };
+
+  useEffect(() => {
+    const displayProducts = async (categoryId: string, searchedValue: string) => {
+      const fetchedProducts = await getProductsByCategory(categoryId, searchedValue);
+      if (fetchedProducts) setProductsByCategory(fetchedProducts.data);
+    };
+    displayProducts(categoryId, searchedValue);
+  }, [categoryId, searchedValue]);
 
   return (
     <>
