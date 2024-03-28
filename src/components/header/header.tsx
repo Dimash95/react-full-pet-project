@@ -12,6 +12,7 @@ const Header = () => {
 
   const onChange = (checked: boolean) => {
     setTheme(checked ? "dark" : "light");
+    localStorage.setItem("theme", checked ? "dark" : "light");
   };
 
   return (
@@ -49,7 +50,7 @@ const Header = () => {
           <TiShoppingCart className={styles.cart} />
         </Link>
 
-        <Switch defaultChecked onChange={onChange} />
+        <Switch defaultChecked={theme === "dark" ? true : false} onChange={onChange} />
       </div>
     </div>
   );
