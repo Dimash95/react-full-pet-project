@@ -13,11 +13,15 @@ body {
 }
 
 .wrapperDark {
-  background-image: url("./assets/img/dark-back.jpg");
   color: white;
+  background-image: url("./assets/img/dark-back.jpg");
 }
 
 .wrapperLight {
-  background-image: url("./assets/img/light-back.jpg");
   color: black;
+  background-image: url("./assets/img/light-back.jpg");
+}
+
+a {
+  color: gray;
 }
