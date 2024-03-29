@@ -36,7 +36,7 @@ const Category = ({ categories }: CategoryProps) => {
           ))}
         </div>
         <div className={styles.sortSearch}>
-          <Search placeholder="input search text" style={{ width: 300 }} onSearch={onSearch} />
+          <Search placeholder="Search ..." style={{ width: 300 }} onSearch={onSearch} />
         </div>
       </div>
       <div>

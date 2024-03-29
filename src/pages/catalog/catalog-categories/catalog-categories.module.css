@@ -24,9 +24,16 @@
 .categoriesSortSearch {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-  width: 1000px;
+  align-items: center;
+  gap: 30px;
+  width: 80%;
+}
+
+@media screen and (max-width: 835px) {
+  .categoriesSortSearch {
+    justify-content: center;
+  }
 }
 
 .sortSearch {

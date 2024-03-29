@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   max-width: 1220px;
-  width: 100%;
+  width: 80%;
   height: 70px;
   margin: 0 auto;
   margin-top: 40px;
@@ -59,10 +59,4 @@
 
 .icon:hover {
   color: yellow;
-}
-
-@media screen and (max-width: 768px) {
-  .wrapper {
-    display: none;
-  }
 }

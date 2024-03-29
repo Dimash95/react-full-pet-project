@@ -6,6 +6,7 @@ import { ThemeContext } from "./context";
 import classNames from "classnames";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
+import Menu from "./components/menu/menu";
 
 type LayoutProps = {
   children?: React.ReactNode;
@@ -30,6 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           })}
         >
           <Header />
+          <Menu />
           <main className="main">{children}</main>
           <Footer />
         </div>
