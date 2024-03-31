@@ -28,12 +28,12 @@ const Header = () => {
       <FaReact className={styles.logo} />
       <ul className={styles.list}>
         <li>
-          <NavLink to="/react-full-pet-project/" className={setActivePage}>
+          <NavLink to="/react-full-pet-project/" end  className={setActivePage}>
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/react-full-pet-project/catalog/1" className={setActivePage}>
+          <NavLink to="/react-full-pet-project/catalog/" className={setActivePage}>
             Catalog
           </NavLink>
         </li>
