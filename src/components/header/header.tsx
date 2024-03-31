@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+
+import { ThemeContext } from "../../context";
+
 import { FaReact } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
+
 import { Switch } from "antd";
-import styles from "./header.module.css";
-import { ThemeContext } from "../../context";
-import { useContext } from "react";
 import classNames from "classnames";
+import styles from "./header.module.css";
 
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -28,7 +31,7 @@ const Header = () => {
       <FaReact className={styles.logo} />
       <ul className={styles.list}>
         <li>
-          <NavLink to="/react-full-pet-project/" end  className={setActivePage}>
+          <NavLink to="/react-full-pet-project/" end className={setActivePage}>
             Home
           </NavLink>
         </li>

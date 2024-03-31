@@ -1,13 +1,15 @@
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../../context";
+
+import { Switch } from "antd";
 import { FaReact } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
-import { Switch } from "antd";
-import styles from "./menu.module.css";
-import { ThemeContext } from "../../context";
-import { useContext, useState } from "react";
-import classNames from "classnames";
 import { IoCloseSharp } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
+
+import classNames from "classnames";
+import styles from "./menu.module.css";
 
 const Menu = () => {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -17,12 +19,12 @@ const Menu = () => {
     localStorage.setItem("theme", checked ? "dark" : "light");
   };
 
-  const closeMenu = (page?: string) => {
+  const closeMenu = (event?: React.MouseEvent<HTMLAnchorElement>) => {
     const wrapper = document.querySelector(`.${styles.wrapper}`);
     if (wrapper) {
       wrapper.classList.remove(styles.show);
     }
-    if (page) setActivePage(page);
+    if (event) setActivePage(event.currentTarget.text);
   };
 
   const openMenu = () => {
@@ -30,7 +32,6 @@ const Menu = () => {
     if (wrapper) {
       wrapper.classList.add(styles.show);
     }
-    console.log(wrapper);
   };
 
   return (
@@ -55,7 +56,7 @@ const Menu = () => {
             <Link
               to="/react-full-pet-project/"
               className={styles.link}
-              onClick={() => closeMenu("Home")}
+              onClick={(event) => closeMenu(event)}
             >
               Home
             </Link>
@@ -64,7 +65,7 @@ const Menu = () => {
             <Link
               to="/react-full-pet-project/catalog/1"
               className={styles.link}
-              onClick={() => closeMenu("Catalog")}
+              onClick={(event) => closeMenu(event)}
             >
               Catalog
             </Link>
@@ -73,7 +74,7 @@ const Menu = () => {
             <Link
               to="/react-full-pet-project/about"
               className={styles.link}
-              onClick={() => closeMenu("About")}
+              onClick={(event) => closeMenu(event)}
             >
               About
             </Link>
@@ -82,7 +83,7 @@ const Menu = () => {
             <Link
               to="/react-full-pet-project/contacts"
               className={styles.link}
-              onClick={() => closeMenu("Contacts")}
+              onClick={(event) => closeMenu(event)}
             >
               Contacts
             </Link>
@@ -92,7 +93,7 @@ const Menu = () => {
         <Link
           to="/react-full-pet-project/cart"
           className={styles.link}
-          onClick={() => closeMenu("Cart")}
+          onClick={(event) => closeMenu(event)}
         >
           <TiShoppingCart className={styles.cart} />
         </Link>
