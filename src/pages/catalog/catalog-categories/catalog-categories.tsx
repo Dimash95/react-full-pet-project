@@ -13,7 +13,7 @@ type CategoryProps = {
 
 const Category = ({ categories }: CategoryProps) => {
   const { categoryId = "" } = useParams();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef(null);
   const [searchedValue, setSearchedValue] = useState("");
   const { Search } = Input;
 
@@ -25,8 +25,7 @@ const Category = ({ categories }: CategoryProps) => {
     isActive ? styles.activeLink : styles.link;
 
   useEffect(() => {
-    // Фокусировка на текстовом поле при монтировании компонента
-    if (inputRef.current) inputRef.current.focus();
+    if (inputRef.current) (inputRef.current as HTMLInputElement)?.focus();
   }, []);
 
   return (
