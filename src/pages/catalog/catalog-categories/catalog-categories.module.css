@@ -11,14 +11,21 @@
   gap: 20px;
 }
 
-.name {
+.link {
   font-size: 18px;
   text-align: center;
   text-decoration: none;
 }
 
-.name:hover {
+.link:hover {
   color: #d05c81;
+}
+
+.activeLink {
+  font-size: 18px;
+  color: #d05c81;
+  text-align: center;
+  text-decoration: none;
 }
 
 .categoriesSortSearch {

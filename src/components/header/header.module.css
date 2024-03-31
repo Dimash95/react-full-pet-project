@@ -52,6 +52,15 @@
   transition: 0.4s;
 }
 
+.activeLink {
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  color: yellow;
+
+  transition: 0.4s;
+}
+
 .link:hover {
   color: yellow;
 }

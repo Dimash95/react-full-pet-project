@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useState } from "react";
 import CatalogCard from "./catalog-card/catalog-card";
 import { Input } from "antd";
@@ -20,19 +20,22 @@ const Category = ({ categories }: CategoryProps) => {
     setSearchedValue(value);
   }
 
+  const setActiveCategory = ({ isActive }: { isActive: boolean }) =>
+    isActive ? styles.activeLink : styles.link;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.categoriesSortSearch}>
         <div className={styles.categories}>
           {categories.map((category) => (
-            <Link
-              className={styles.name}
+            <NavLink
+              className={setActiveCategory}
               to={`/react-full-pet-project/catalog/${category.id}`}
               key={category.id}
               onClick={() => setSearchedValue("")}
             >
               {category.name}
-            </Link>
+            </NavLink>
           ))}
         </div>
         <div className={styles.sortSearch}>
