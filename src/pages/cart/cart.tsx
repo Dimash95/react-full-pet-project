@@ -52,7 +52,7 @@ const Cart = () => {
               <Link to={`/react-full-pet-project/catalog/${product.id}/detail/${product.id}`}>
                 <img src={product.images[0]} alt={product.title} className={styles.cardImage} />
               </Link>
-              <p className={styles.name}>{product.title}</p>
+              <p className={styles.name}>{product.title.slice(0, 20) + "..."}</p>
               <div className={styles.priceCartWrapper}>
                 <p>{product.price} $</p>
               </div>

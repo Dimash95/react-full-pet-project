@@ -56,7 +56,7 @@ const Header = () => {
           <TiShoppingCart className={styles.cart} />
         </NavLink>
 
-        <Switch defaultChecked={theme === "dark" ? true : false} onChange={onChange} />
+        <Switch defaultChecked={theme === "dark"} onChange={onChange} />
       </div>
     </div>
   );

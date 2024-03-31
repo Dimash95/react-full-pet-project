@@ -1,5 +1,5 @@
 import { NavLink, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CatalogCard from "./catalog-card/catalog-card";
 import { Input } from "antd";
 import styles from "./catalog-categories.module.css";
@@ -13,6 +13,7 @@ type CategoryProps = {
 
 const Category = ({ categories }: CategoryProps) => {
   const { categoryId = "" } = useParams();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [searchedValue, setSearchedValue] = useState("");
   const { Search } = Input;
 
@@ -22,6 +23,11 @@ const Category = ({ categories }: CategoryProps) => {
 
   const setActiveCategory = ({ isActive }: { isActive: boolean }) =>
     isActive ? styles.activeLink : styles.link;
+
+  useEffect(() => {
+    // Фокусировка на текстовом поле при монтировании компонента
+    if (inputRef.current) inputRef.current.focus();
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -39,7 +45,12 @@ const Category = ({ categories }: CategoryProps) => {
           ))}
         </div>
         <div className={styles.sortSearch}>
-          <Search placeholder="Search ..." style={{ width: 300 }} onSearch={onSearch} />
+          <Search
+            ref={inputRef}
+            placeholder="Search ..."
+            style={{ width: 300 }}
+            onSearch={onSearch}
+          />
         </div>
       </div>
       <div>
