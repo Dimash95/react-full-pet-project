@@ -5,6 +5,7 @@ import { ThemeContext } from "../../context";
 
 import { FaReact } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
+import { CgProfile } from "react-icons/cg";
 
 import { Switch } from "antd";
 import classNames from "classnames";
@@ -52,8 +53,11 @@ const Header = () => {
         </li>
       </ul>
       <div className={styles.icons}>
+        <NavLink to="/react-full-pet-project/login" className={setActivePage}>
+          <CgProfile className={styles.icon} />
+        </NavLink>
         <NavLink to="/react-full-pet-project/cart" className={setActivePage}>
-          <TiShoppingCart className={styles.cart} />
+          <TiShoppingCart className={styles.icon} />
         </NavLink>
 
         <Switch defaultChecked={theme === "dark"} onChange={onChange} />

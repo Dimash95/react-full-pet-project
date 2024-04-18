@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wrapper button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #d05c81;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.wrapper button:active {
+  background-color: #333;
+}

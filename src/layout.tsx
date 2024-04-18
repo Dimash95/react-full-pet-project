@@ -1,12 +1,13 @@
 // components/Layout.js
 import React, { useState } from "react";
+import { Provider } from "react-redux";
+
+import Menu from "./components/menu/menu";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import { ThemeContext } from "./context";
 import classNames from "classnames";
 import { store } from "./store/store";
-import { Provider } from "react-redux";
-import Menu from "./components/menu/menu";
 
 type LayoutProps = {
   children?: React.ReactNode;

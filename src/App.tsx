@@ -6,17 +6,51 @@ import About from "./pages/about/about";
 import Contacts from "./pages/contacts/contacts";
 import Cart from "./pages/cart/cart";
 import { Detail } from "./pages/detail/detail";
+import LoginForm from "./components/login/login";
+import PrivateRoute from "./utils/private-route";
 
 const App = () => (
   <Layout>
     <Routes>
-      <Route path="/react-full-pet-project" element={<Home />} />
-      <Route path="/react-full-pet-project/catalog" element={<Catalog />} />
-      <Route path="/react-full-pet-project/catalog/:categoryId" element={<Catalog />} />
-      <Route path="/react-full-pet-project/catalog/:categoryId/detail/:cardId" element={<Detail />} />
+      <Route
+        path="/react-full-pet-project"
+        element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/react-full-pet-project/catalog"
+        element={
+          <PrivateRoute>
+            <Catalog />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/react-full-pet-project/catalog/:categoryId"
+        element={
+          <PrivateRoute>
+            <Catalog />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/react-full-pet-project/catalog/:categoryId/detail/:cardId"
+        element={<Detail />}
+      />
       <Route path="/react-full-pet-project/about" element={<About />} />
       <Route path="/react-full-pet-project/contacts" element={<Contacts />} />
-      <Route path="/react-full-pet-project/cart" element={<Cart />} />
+      <Route
+        path="/react-full-pet-project/cart"
+        element={
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        }
+      />
+      <Route path="/react-full-pet-project/login" element={<LoginForm />} />
     </Routes>
   </Layout>
 );

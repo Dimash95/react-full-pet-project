@@ -71,7 +71,7 @@
   gap: 10px;
 }
 
-.cart {
+.icon {
   font-size: 2em;
   transition: 0.4s;
 }
@@ -82,7 +82,7 @@
   cursor: pointer;
 }
 
-.cart:hover {
+.icon:hover {
   color: yellow;
 }
 
