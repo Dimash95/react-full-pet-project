@@ -18,6 +18,17 @@
   background-color: #333;
 }
 
+.wrapperLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+}
+
+.title {
+  font-size: 24px;
+}
+
 .list {
   display: flex;
   align-items: center;
@@ -68,8 +79,10 @@
 
 .icons {
   display: flex;
+  justify-content: end;
   align-items: center;
   gap: 10px;
+  width: 300px;
 }
 
 .icon {

@@ -46,7 +46,10 @@ const Header = () => {
         styles.wrapper
       )}
     >
-      <FaReact className={styles.logo} />
+      <div className={styles.wrapperLogo}>
+        <FaReact className={styles.logo} />
+        <h1 className={styles.title}>React Full Pet Project</h1>
+      </div>
       <ul className={styles.list}>
         <li>
           <NavLink to="/react-full-pet-project/" end className={setActivePage}>
