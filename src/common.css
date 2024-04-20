@@ -25,3 +25,28 @@ body {
 a {
   color: gray;
 }
+
+/* .wrapperDark button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #d05c81;
+  color: white;
+}
+
+.wrapperLight button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #333333;
+  color: white;
+}
+
+button {
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+button:active {
+  opacity: 0.8;
+} */

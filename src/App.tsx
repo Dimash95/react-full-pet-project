@@ -7,7 +7,9 @@ import Contacts from "./pages/contacts/contacts";
 import Cart from "./pages/cart/cart";
 import { Detail } from "./pages/detail/detail";
 import LoginForm from "./components/login/login";
+import RegisterForm from "./components/registration/registration";
 import PrivateRoute from "./utils/private-route";
+import UserProfile from "./components/user-profile/user-profile";
 
 const App = () => (
   <Layout>
@@ -38,7 +40,11 @@ const App = () => (
       />
       <Route
         path="/react-full-pet-project/catalog/:categoryId/detail/:cardId"
-        element={<Detail />}
+        element={
+          <PrivateRoute>
+            <Detail />
+          </PrivateRoute>
+        }
       />
       <Route path="/react-full-pet-project/about" element={<About />} />
       <Route path="/react-full-pet-project/contacts" element={<Contacts />} />
@@ -51,6 +57,15 @@ const App = () => (
         }
       />
       <Route path="/react-full-pet-project/login" element={<LoginForm />} />
+      <Route path="/react-full-pet-project/registration" element={<RegisterForm />} />
+      <Route
+        path="/react-full-pet-project/profile"
+        element={
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   </Layout>
 );

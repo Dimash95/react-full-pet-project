@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import { ThemeContext } from "../../context";
@@ -11,8 +11,25 @@ import { Switch } from "antd";
 import classNames from "classnames";
 import styles from "./header.module.css";
 
+import type { MenuProps } from "antd";
+import { Dropdown } from "antd";
+
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: <NavLink to="/react-full-pet-project/login">Login</NavLink>,
+  },
+  {
+    key: "2",
+    label: <NavLink to="/react-full-pet-project/registration">Registration</NavLink>,
+  },
+];
+
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext);
+  const accessToken = localStorage.getItem("access_token");
+
+  useEffect(() => {}, [accessToken]);
 
   const setActivePage = ({ isActive }: { isActive: boolean }) =>
     isActive ? styles.activeLink : styles.link;
@@ -37,7 +54,7 @@ const Header = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/react-full-pet-project/catalog/" className={setActivePage}>
+          <NavLink to="/react-full-pet-project/catalog/1" className={setActivePage}>
             Catalog
           </NavLink>
         </li>
@@ -53,9 +70,15 @@ const Header = () => {
         </li>
       </ul>
       <div className={styles.icons}>
-        <NavLink to="/react-full-pet-project/login" className={setActivePage}>
-          <CgProfile className={styles.icon} />
-        </NavLink>
+        {accessToken ? (
+          <NavLink to="/react-full-pet-project/profile" className={setActivePage}>
+            <CgProfile className={styles.icon} />
+          </NavLink>
+        ) : (
+          <Dropdown menu={{ items }} placement="bottom" arrow>
+            <CgProfile className={styles.icon} />
+          </Dropdown>
+        )}
         <NavLink to="/react-full-pet-project/cart" className={setActivePage}>
           <TiShoppingCart className={styles.icon} />
         </NavLink>

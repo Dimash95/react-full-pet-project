@@ -2,8 +2,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "./user-profile.module.css";
 
+type User = {
+  name: string;
+  email: string;
+  avatar: string;
+};
+
 const UserProfile = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User>({
+    name: "",
+    email: "",
+    avatar: "",
+  });
   const accessToken = localStorage.getItem("access_token");
 
   useEffect(() => {
@@ -23,7 +33,7 @@ const UserProfile = () => {
     };
 
     fetchData();
-  }, []);
+  }, [accessToken]);
 
   const onQuitFromSite = () => {
     localStorage.removeItem("access_token");
