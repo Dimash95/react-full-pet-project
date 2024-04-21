@@ -6,8 +6,8 @@ import About from "./pages/about/about";
 import Contacts from "./pages/contacts/contacts";
 import Cart from "./pages/cart/cart";
 import { Detail } from "./pages/detail/detail";
-import LoginForm from "./components/login/login";
-import RegisterForm from "./components/registration/registration";
+import Login from "./components/login/login";
+import Registration from "./components/registration/registration";
 import PrivateRoute from "./utils/private-route";
 import UserProfile from "./components/user-profile/user-profile";
 
@@ -56,8 +56,8 @@ const App = () => (
           </PrivateRoute>
         }
       />
-      <Route path="/react-full-pet-project/login" element={<LoginForm />} />
-      <Route path="/react-full-pet-project/registration" element={<RegisterForm />} />
+      <Route path="/react-full-pet-project/login" element={<Login />} />
+      <Route path="/react-full-pet-project/registration" element={<Registration />} />
       <Route
         path="/react-full-pet-project/profile"
         element={

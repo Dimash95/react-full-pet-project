@@ -50,7 +50,7 @@ const UserProfile = () => {
               <h1>{user.name}</h1>
               <p>{user.email}</p>
             </div>
-            <img src={user.avatar} alt="User avatar" />
+            <img className={style.img} src={user.avatar} alt="User avatar" />
           </div>
           <button onClick={onQuitFromSite}>Quit</button>
         </div>

@@ -1,49 +1,59 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import style from "./login.module.css";
-import { AxiosError } from "../../types/axios-error";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { LoginForm } from "../../types/form";
 
-const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+const schema = yup.object().shape({
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup.string().required("Password is required").min(4, "Password is too short"),
+});
+
+const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<LoginForm>({ mode: "onBlur", resolver: yupResolver(schema) });
 
   const navigate = useNavigate();
 
-  const handleLogin = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", {
-        email,
-        password,
-      });
-      localStorage.setItem("access_token", response.data.access_token);
-      localStorage.setItem("refresh_token", response.data.refresh_token);
-      navigate("/react-full-pet-project/");
-    } catch (err: unknown) {
-      setError((err as AxiosError).response?.data?.message || "An error occurred during login.");
-    }
+  const onSubmit: SubmitHandler<LoginForm> = async (data) => {
+    const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", {
+      email: data.email,
+      password: data.password,
+    });
+    localStorage.setItem("access_token", response.data.access_token);
+    localStorage.setItem("refresh_token", response.data.refresh_token);
+    navigate("/react-full-pet-project/");
   };
 
   return (
-    <>
-      <form className={style.form} onSubmit={handleLogin}>
+    <div className={style.wrapper}>
+      <h1>Login</h1>
+      <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={style.info}>
           <label>Email</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <div>
+            <input type="email" {...register("email")} />
+            <p className={style.error}>{errors.email?.message}</p>
+          </div>
         </div>
         <div className={style.info}>
           <label>Password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <div>
+            <input type="password" {...register("password")} />
+            <p className={style.error}>{errors.password?.message}</p>
+          </div>
         </div>
-        {error && <p>{error}</p>}
-        <button className={style.btn} type="submit">
+        <button className={style.btn} type="submit" disabled={!isValid}>
           Login
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
-export default LoginForm;
+export default Login;

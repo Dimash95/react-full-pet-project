@@ -34,3 +34,7 @@
 .wrapper button:active {
   background-color: #333;
 }
+
+.img {
+  max-width: 300px;
+}
