@@ -27,6 +27,7 @@
 
 .title {
   font-size: 24px;
+  color: white;
 }
 
 .list {
@@ -98,6 +99,11 @@
 
 .icon:hover {
   color: yellow;
+}
+
+.authWrapper{
+  display: flex;
+  gap: 20px;
 }
 
 @media screen and (max-width: 768px) {

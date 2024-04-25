@@ -11,20 +11,6 @@ import { Switch } from "antd";
 import classNames from "classnames";
 import styles from "./header.module.css";
 
-import type { MenuProps } from "antd";
-import { Dropdown } from "antd";
-
-const items: MenuProps["items"] = [
-  {
-    key: "1",
-    label: <NavLink to="/react-full-pet-project/login">Login</NavLink>,
-  },
-  {
-    key: "2",
-    label: <NavLink to="/react-full-pet-project/registration">Registration</NavLink>,
-  },
-];
-
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   const accessToken = localStorage.getItem("access_token");
@@ -78,9 +64,14 @@ const Header = () => {
             <CgProfile className={styles.icon} />
           </NavLink>
         ) : (
-          <Dropdown menu={{ items }} placement="bottom" arrow>
-            <CgProfile className={styles.icon} />
-          </Dropdown>
+          <div className={styles.authWrapper}>
+            <NavLink className={setActivePage} to="/react-full-pet-project/login">
+              Login
+            </NavLink>
+            <NavLink className={setActivePage} to="/react-full-pet-project/registration">
+              Registration
+            </NavLink>
+          </div>
         )}
         <NavLink to="/react-full-pet-project/cart" className={setActivePage}>
           <TiShoppingCart className={styles.icon} />

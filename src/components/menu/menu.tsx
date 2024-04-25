@@ -14,6 +14,7 @@ import styles from "./menu.module.css";
 const Menu = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   const [activePage, setActivePage] = useState("Home");
+  const accessToken = localStorage.getItem("access_token");
   const onChange = (checked: boolean) => {
     setTheme(checked ? "dark" : "light");
     localStorage.setItem("theme", checked ? "dark" : "light");
@@ -52,6 +53,34 @@ const Menu = () => {
           <Switch defaultChecked={theme === "dark" ? true : false} onChange={onChange} />
         </div>
         <ul className={styles.list}>
+          <li>
+            {accessToken ? (
+              <Link
+                to="/react-full-pet-project/profile"
+                className={styles.link}
+                onClick={(event) => closeMenu(event)}
+              >
+                Profile
+              </Link>
+            ) : (
+              <div className={styles.authWrapper}>
+                <Link
+                  to="/react-full-pet-project/login"
+                  className={styles.link}
+                  onClick={(event) => closeMenu(event)}
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/react-full-pet-project/registration"
+                  className={styles.link}
+                  onClick={(event) => closeMenu(event)}
+                >
+                  Registration
+                </Link>
+              </div>
+            )}
+          </li>
           <li>
             <Link
               to="/react-full-pet-project/"
